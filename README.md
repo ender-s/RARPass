@@ -6,8 +6,11 @@
  This program works on both Windows and Linux.  
  
 # Requirements
- Python (version >= 3)  (unrar module is required)  
- For Linux: UNRAR library file libunrar.so is required in /usr/lib/ directory. (Recommended UNRAR library version: 6.0.3)
+ Python (version >= 3)  
+    Required modules:  
+      unrar  
+      PyQt5  
+ For Linux: UNRAR library file libunrar.so is required in /usr/lib/ directory. (Recommended UNRAR library version: 6.0.3)  
 
 # Screenshot
  ![Screenshot](https://raw.githubusercontent.com/ender-s/RARPass/main/ss.jpg)
