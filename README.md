@@ -7,9 +7,9 @@
  
 # Requirements
  Python (version >= 3)  
-    Required modules:  
-      unrar  
-      PyQt5  
+ &nbsp;&nbsp;Required modules:  
+ &nbsp;&nbsp;&nbsp;&nbsp;unrar  
+ &nbsp;&nbsp;&nbsp;&nbsp;PyQt5  
  For Linux: UNRAR library file libunrar.so is required in /usr/lib/ directory. (Recommended UNRAR library version: 6.0.3)  
 
 # Screenshot
