@@ -1,6 +1,6 @@
 from Ui_MainWindow import Ui_MainWindow
 from Ui_About import Ui_Form
-from PwdCrack import PwdCrack
+from Pwd import Pwd
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
@@ -30,7 +30,7 @@ class Main(object):
     lowerLimit = 0
     upperLimit = 0
     TEMP_FOLDER_NAME = "temp"
-    WORKING_DIR_NAME = "RarCrackerWorkingDir"
+    WORKING_DIR_NAME = "RarPassWorkingDir"
     WORKING_DIR_PATH = os.path.join(TEMP_FOLDER_NAME, WORKING_DIR_NAME)
     createdDirName = None
     sampleFile = None
@@ -288,7 +288,7 @@ class Main(object):
         return True
 
     def start(self):
-        self.process = PwdCrack(self)
+        self.process = Pwd(self)
         self.process.progressBarSignal.connect(self.updateProgressBarValue)
         self.process.addMessageSignal.connect(self.addMessage)
         self.process.statusBarSignal.connect(self.setStatusBarText)

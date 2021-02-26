@@ -7,7 +7,7 @@ from unrar import rarfile
 rarfile.b = lambda x: x.encode("cp1254")
 
 
-class PwdCrack(QThread):
+class Pwd(QThread):
     progressBarSignal = pyqtSignal(int)
     addMessageSignal = pyqtSignal(str)
     statusBarSignal = pyqtSignal(str)
