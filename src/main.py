@@ -1,4 +1,3 @@
-from tkinter import E
 from Ui_MainWindow import Ui_MainWindow
 from Ui_About import Ui_Form
 from Pwd import Pwd
