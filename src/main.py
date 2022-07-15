@@ -199,6 +199,12 @@ class Main(object):
 
     def _detect_sample_file(self):
         il = [f for f in self.rarFile.infolist() if f.file_size > 0]
+        if len(il) == 0:
+            self.sampleFile = self.rarFile.infolist()[0]
+            self.addMessage("WARNING!: Either there is no file contained in the rar or all files in the rar are empty.\n" + 
+                            "The file may have been detected as password-protected even though it is not.")
+            return None
+
         minF = il[0]
         for i in range(1, len(il)):
             if il[i].file_size < minF.file_size:
@@ -217,8 +223,6 @@ class Main(object):
         
 
     def loadInformation(self):
-        
-        
         self.info = [["Is the file password-protected?", ""], ["Are the filenames encrypted?", "No"]]
         self._detect_sample_file()
         pwd_protected, err_status, exception_obj = self._is_the_archive_password_protected()
@@ -402,5 +406,3 @@ if __name__ == "__main__":
     from unrar import rarfile
     import unrar
     main = Main()
-    
-    
