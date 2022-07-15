@@ -1,3 +1,4 @@
+from tkinter import E
 from Ui_MainWindow import Ui_MainWindow
 from Ui_About import Ui_Form
 from Pwd import Pwd
@@ -196,14 +197,20 @@ class Main(object):
         else:
             return (False, 0, None)
 
-
     def _detect_sample_file(self):
         il = [f for f in self.rarFile.infolist() if f.file_size > 0]
         if len(il) == 0:
-            self.sampleFile = self.rarFile.infolist()[0]
             self.addMessage("WARNING!: Either there is no file contained in the rar or all files in the rar are empty.\n" + 
                             "The file may have been detected as password-protected even though it is not.")
-            return None
+            
+            try:
+                self.sampleFile = self.rarFile.infolist()[0]
+            except IndexError:
+                return False, None
+            except Exception as e:
+                return False, e
+            
+            return True, None
 
         minF = il[0]
         for i in range(1, len(il)):
@@ -211,6 +218,7 @@ class Main(object):
                 minF = il[i]
         
         self.sampleFile = minF
+        return True, None
 
     def _open_about_window(self):
         self.aboutWindow = QtWidgets.QWidget()
@@ -224,7 +232,15 @@ class Main(object):
 
     def loadInformation(self):
         self.info = [["Is the file password-protected?", ""], ["Are the filenames encrypted?", "No"]]
-        self._detect_sample_file()
+        sample_file_detection_success, exception_obj = self._detect_sample_file()
+        if not sample_file_detection_success:
+            if exception_obj:
+                self.addMessage(f"An unexpected error has occurred!: {str(exception_obj)}")
+            else:
+                self.addMessage(f"The RAR file is empty!")
+            self.clearChoice()
+            return None
+
         pwd_protected, err_status, exception_obj = self._is_the_archive_password_protected()
         if err_status != 0:
             self.addMessage(f"An unexpected error has occurred!: {str(exception_obj)}")
